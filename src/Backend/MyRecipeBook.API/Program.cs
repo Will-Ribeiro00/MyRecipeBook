@@ -2,6 +2,8 @@ using MyRecipeBook.API.Filters;
 using MyRecipeBook.API.Middleware.Culture;
 using MyRecipeBook.Application;
 using MyRecipeBook.Infrastructure;
+using MyRecipeBook.Infrastructure.Extensions;
+using MyRecipeBook.Infrastructure.Migrations;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -36,4 +38,16 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+MigrateDatabase();
+
 app.Run();
+
+
+void MigrateDatabase()
+{
+    var connectionString = builder.Configuration.ConnectionString();
+
+    var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+
+    DatabaseMigration.Migrate(connectionString, serviceScope.ServiceProvider);
+}
