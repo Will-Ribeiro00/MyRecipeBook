@@ -14,18 +14,13 @@ namespace MyRecipeBook.Application.UseCases.User.Register
             RuleFor(user => user.Email).NotEmpty()
                 .WithMessage(ResourceMessagesExceptions.EMAIL_EMPTY);
 
-            RuleFor(user => user.Email).EmailAddress()
+            When(user => string.IsNullOrEmpty(user.Email) == false, () =>
+            {
+                RuleFor(user => user.Email).EmailAddress()
                 .WithMessage(ResourceMessagesExceptions.EMAIL_INVALID);
-
+            });
             
-            RuleFor(user => user.Password)
-                .Cascade(CascadeMode.Stop)
-                    .NotEmpty()
-                        .WithMessage(ResourceMessagesExceptions.PASSWORD_INVALID)
-                    .MinimumLength(8)
-                        .WithMessage(ResourceMessagesExceptions.PASSWORD_INVALID)
-                    .Matches(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).+$")
-                        .WithMessage(ResourceMessagesExceptions.PASSWORD_INVALID);
+            RuleFor(user => user.Password).SetValidator(new PasswordValidator<RequestRegisterUserJson>());
         }
     }
 }
