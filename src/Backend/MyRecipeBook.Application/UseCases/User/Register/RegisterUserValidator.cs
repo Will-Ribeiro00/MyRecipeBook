@@ -14,7 +14,7 @@ namespace MyRecipeBook.Application.UseCases.User.Register
             RuleFor(user => user.Email).NotEmpty()
                 .WithMessage(ResourceMessagesExceptions.EMAIL_EMPTY);
 
-            When(user => string.IsNullOrEmpty(user.Email) == false, () =>
+            When(user => !string.IsNullOrEmpty(user.Email), () =>
             {
                 RuleFor(user => user.Email).EmailAddress()
                 .WithMessage(ResourceMessagesExceptions.EMAIL_INVALID);

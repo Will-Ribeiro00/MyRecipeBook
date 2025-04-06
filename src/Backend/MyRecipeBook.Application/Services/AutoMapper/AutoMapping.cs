@@ -16,9 +16,5 @@ namespace MyRecipeBook.Application.Services.AutoMapper
             CreateMap<RequestRegisterUserJson, User>()
                 .ForMember(dest => dest.Password, option => option.Ignore());
         }
-        private void DomainToResponse()
-        {
-
-        }
     }
 }

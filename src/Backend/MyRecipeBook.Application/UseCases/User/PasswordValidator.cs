@@ -19,8 +19,6 @@ namespace MyRecipeBook.Application.UseCases.User
 
         public override bool IsValid(ValidationContext<T> context, string password)
         {
-            var errorMessagesList = new StringBuilder();
-
             if (string.IsNullOrWhiteSpace(password))
             {
                 context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, ResourceMessagesExceptions.PASSWORD_INVALID);
