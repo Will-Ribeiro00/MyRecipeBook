@@ -26,6 +26,13 @@ namespace MyRecipeBook.API.Filters
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 context.Result = new BadRequestObjectResult(new ResponseErrorJson(errorList));
             }
+            else if (context.Exception is InvalidLoginException invalidLoginException)
+            {
+                var errorList = invalidLoginException!.Message;
+
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(errorList));
+            }
         }
         private static void ThrowUnknowException(ExceptionContext context)
         {
