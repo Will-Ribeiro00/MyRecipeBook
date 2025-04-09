@@ -20,7 +20,7 @@ namespace MyRecipeBook.Application.UseCases.Login
         {
             var encrypterPassword = _passwordEncrypter.Encrypt(request.Password);
 
-            var user = await _repository.GetByEmailAndPassword(request.Email, encrypterPassword) ?? throw new InvalidLoginException();
+            var user = await _repository.GetUserByEmailAndPassword(request.Email, encrypterPassword) ?? throw new InvalidLoginException();
 
             return  new ResponseRegisteredUserJson
             {
