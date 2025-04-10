@@ -43,6 +43,7 @@ namespace WebApi.Test.Login.DoLogin
             response.StatusCode.ShouldBe(HttpStatusCode.OK);
             responseData.RootElement.GetProperty("name").GetString().ShouldNotBeNullOrWhiteSpace();
             responseData.RootElement.GetProperty("name").GetString().ShouldBe(_name);
+            responseData.RootElement.GetProperty("tokens").GetProperty("accessToken").GetString().ShouldNotBeNullOrEmpty();
         }
         [Theory]
         [ClassData(typeof(CultureInlineDataTest))]

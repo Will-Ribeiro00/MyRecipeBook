@@ -2,6 +2,7 @@
 using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Requests;
+using CommonTestUtilities.Tokens;
 using MyRecipeBook.Application.UseCases.Login;
 using MyRecipeBook.Communication.Requests.Login;
 using MyRecipeBook.Exception;
@@ -28,8 +29,10 @@ namespace UseCaseTest.Login.DoLogin
 
             // Assign 
             result.ShouldNotBeNull();
+            result.Tokens.ShouldNotBeNull();
             result.Name.ShouldNotBeNullOrWhiteSpace();
             result.Name.ShouldBe(user.Name);
+            result.Tokens.AccessToken.ShouldNotBeNullOrEmpty();
         }
         [Fact]
         public async Task ErrorInvalidUser()
@@ -48,11 +51,12 @@ namespace UseCaseTest.Login.DoLogin
         {
             var passwordEncrypter = PasswordEncrypterBuilder.Build();
             var readOnlyRepository = new UserReadOnlyRepositoryBuilder();
+            var accessTokenGenerator = JwtTokenGeneratorBuilder.Build();
 
             if (user is not null)
                 readOnlyRepository.GetUserByEmailAndPassword(user);
 
-            return new DoLoginUseCase(readOnlyRepository.Build(), passwordEncrypter);
+            return new DoLoginUseCase(readOnlyRepository.Build(), passwordEncrypter, accessTokenGenerator);
         }
     }
 }
