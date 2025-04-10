@@ -122,5 +122,23 @@ namespace MyRecipeBook.Exception {
                 return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User without permission.
+        /// </summary>
+        public static string USER_WITHOUT_PERMISSION_ACCESS_RESOURCE {
+            get {
+                return ResourceManager.GetString("USER_WITHOUT_PERMISSION_ACCESS_RESOURCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No token was sent.
+        /// </summary>
+        public static string WITHOUT_TOKEN {
+            get {
+                return ResourceManager.GetString("WITHOUT_TOKEN", resourceCulture);
+            }
+        }
     }
 }
