@@ -4,5 +4,6 @@
     {
         public const int TABLE_USER = 1;
         public const int ADJUSTE_TABLE_USER = 2;
+        public const int ADD_COLUMN_USERIDENTIFIER = 3;
     }
 }
