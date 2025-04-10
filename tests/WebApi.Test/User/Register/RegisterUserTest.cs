@@ -30,6 +30,7 @@ namespace WebApi.Test.User.Register
             response.StatusCode.ShouldBe(HttpStatusCode.Created);
             responseData.RootElement.GetProperty("name").GetString().ShouldNotBeNull();
             responseData.RootElement.GetProperty("name").GetString().ShouldBe(request.Name);
+            responseData.RootElement.GetProperty("tokens").GetProperty("accessToken").GetString().ShouldNotBeNullOrEmpty();
         }
         [Theory]
         [ClassData(typeof(CultureInlineDataTest))]
