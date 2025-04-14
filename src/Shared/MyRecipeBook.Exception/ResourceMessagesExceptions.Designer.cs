@@ -133,7 +133,7 @@ namespace MyRecipeBook.Exception {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No token was sent.
+        ///   Looks up a localized string similar to Request don&apos;t have token.
         /// </summary>
         public static string WITHOUT_TOKEN {
             get {
