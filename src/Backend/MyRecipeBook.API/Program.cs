@@ -2,7 +2,9 @@ using Microsoft.OpenApi.Models;
 using MyRecipeBook.API.Converters;
 using MyRecipeBook.API.Filters;
 using MyRecipeBook.API.Middleware.Culture;
+using MyRecipeBook.API.Token;
 using MyRecipeBook.Application;
+using MyRecipeBook.Domain.Secutiry.Tokens;
 using MyRecipeBook.Infrastructure;
 using MyRecipeBook.Infrastructure.Extensions;
 using MyRecipeBook.Infrastructure.Migrations;
@@ -57,6 +59,10 @@ builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddRouting(option => option.LowercaseUrls = true);
+
+builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
+
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
