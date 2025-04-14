@@ -33,7 +33,7 @@ namespace MyRecipeBook.API.Filters
             }
             catch (SecurityTokenExpiredException)
             {
-                context.Result = new UnauthorizedObjectResult(new ResponseErrorJson("Token is expired")
+                context.Result = new UnauthorizedObjectResult(new ResponseErrorJson("TokenIsExpired")
                 {
                     TokenIsExpired = true
                 });
