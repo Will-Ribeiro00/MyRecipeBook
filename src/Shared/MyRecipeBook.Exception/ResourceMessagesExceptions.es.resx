@@ -142,6 +142,6 @@
     <value>Usuario sin permiso</value>
   </data>
   <data name="WITHOUT_TOKEN" xml:space="preserve">
-    <value>No se envió ningún token</value>
+    <value>La solicitud no tiene token</value>
   </data>
 </root>
