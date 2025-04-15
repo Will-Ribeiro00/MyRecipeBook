@@ -1,12 +1,13 @@
-﻿using System.Security.Cryptography;
+﻿using MyRecipeBook.Domain.Secutiry.Cryptography;
+using System.Security.Cryptography;
 using System.Text;
 
-namespace MyRecipeBook.Application.Services.Cryptography
+namespace MyRecipeBook.Infrastructure.Security.Cryptography
 {
-    public class PasswordEncrypter
+    public class Sha512Encrypter : IPasswordEncrypter
     {
         private readonly string _additionalKey;
-        public PasswordEncrypter(string additionalKey) => _additionalKey = additionalKey;
+        public Sha512Encrypter(string additionalKey) => _additionalKey = additionalKey;
         public string Encrypt(string password)
         {
             var newPassword = $"{password}{_additionalKey}";
