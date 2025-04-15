@@ -23,7 +23,7 @@ namespace MyRecipeBook.Infrastructure
             AddUnitOfWork(services);
             AddRepositories(services);
             AddTokens(services, configuration);
-            AddLoggedUSer(services);
+            AddLoggedUser(services);
 
             if (configuration.IsUnitTestEnviroment())
                 return;
@@ -46,6 +46,7 @@ namespace MyRecipeBook.Infrastructure
         {
             services.AddScoped<IUserReadOnlyRepository, UserRepository>();
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
+            services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
         }
         private static void AddUnitOfWork(IServiceCollection services)
         {
@@ -69,7 +70,7 @@ namespace MyRecipeBook.Infrastructure
             services.AddScoped<IAccessTokenGenerator>(options => new JwtTokenGenerator(expirationTimeMinutes, signingKey!));
             services.AddScoped<IAccessTokenValidator>(options => new JwtTokenValidator(signingKey!));
         }
-        private static void AddLoggedUSer(IServiceCollection services)
+        private static void AddLoggedUser(IServiceCollection services)
         {
             services.AddScoped<ILoggedUser, LoggedUser>();
         }
