@@ -8,7 +8,7 @@ namespace WebApi.Test.User.Profile
 {
     public class GetUserProfileTest : MyRecipeBookClassFixture
     {
-        private readonly string _METHOD = "user";
+        private const string METHOD = "user";
 
         private readonly string _name;
         private readonly string _email;
@@ -26,7 +26,7 @@ namespace WebApi.Test.User.Profile
         {
             // Arrange
             var token = JwtTokenGeneratorBuilder.Build().Generate(_userIdentifier);
-            var response = await DoGet(_METHOD, token: token);
+            var response = await DoGet(METHOD, token: token);
 
             // Act and Assert
             await using var responseBody = await response.Content.ReadAsStreamAsync();

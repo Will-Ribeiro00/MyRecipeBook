@@ -1,4 +1,5 @@
 ﻿using CommonTestUtilities.Requests;
+using CommonTestUtilities.Tokens;
 using MyRecipeBook.Exception;
 using Shouldly;
 using System.Globalization;
@@ -6,45 +7,44 @@ using System.Net;
 using System.Text.Json;
 using WebApi.Test.InlineData;
 
-namespace WebApi.Test.User.Register
+namespace WebApi.Test.User.Update
 {
-    public class RegisterUserTest : MyRecipeBookClassFixture
+    public class UpdateUserTest : MyRecipeBookClassFixture
     {
         private const string METHOD = "user";
-
-        public RegisterUserTest(CustomWebApplicationFactory factory) : base(factory) { }
+        private readonly Guid _userIdentifier;
+        public UpdateUserTest(CustomWebApplicationFactory factory) : base(factory)
+        {
+            _userIdentifier = factory.GetUserIdentifier();
+        }
 
         [Fact]
         public async Task Success()
         {
             // Arrange
-            var request = RequestRegisterUserJsonBuilder.Build();
-            var response = await DoPost(METHOD, request);
+            var request = RequestUpdateUserJsonBuilder.Build();
+            var token = JwtTokenGeneratorBuilder.Build().Generate(_userIdentifier);
 
             // Act
-            await using var responseBody = await response.Content.ReadAsStreamAsync();
-
-            var responseData = await JsonDocument.ParseAsync(responseBody);
+            var response = await DoPut(METHOD, request, token);
 
             // Assert
-            response.StatusCode.ShouldBe(HttpStatusCode.Created);
-            responseData.RootElement.GetProperty("name").GetString().ShouldNotBeNull();
-            responseData.RootElement.GetProperty("name").GetString().ShouldBe(request.Name);
-            responseData.RootElement.GetProperty("tokens").GetProperty("accessToken").GetString().ShouldNotBeNullOrEmpty();
+            response.StatusCode.ShouldBe(HttpStatusCode.NoContent);
         }
+
         [Theory]
         [ClassData(typeof(CultureInlineDataTest))]
         public async Task ErrorNameEmpty(string culture)
         {
             // Arrange
-            var request = RequestRegisterUserJsonBuilder.Build();
+            var request = RequestUpdateUserJsonBuilder.Build();
             request.Name = string.Empty;
-
-            var response = await DoPost(METHOD, request, culture);
+            var token = JwtTokenGeneratorBuilder.Build().Generate(_userIdentifier);
 
             // Act
-            await using var responseBody = await response.Content.ReadAsStreamAsync();
+            var response = await DoPut(METHOD, request, token, culture);
 
+            await using var responseBody = await response.Content.ReadAsStreamAsync();
             var responseData = await JsonDocument.ParseAsync(responseBody);
 
             var errors = responseData.RootElement.GetProperty("errors").EnumerateArray();
