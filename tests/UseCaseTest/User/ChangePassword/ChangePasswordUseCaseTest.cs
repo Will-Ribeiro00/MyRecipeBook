@@ -55,6 +55,28 @@ namespace UseCaseTest.User.ChangePassword
             user.Password.ShouldBe(passwordEncrypter.Encrypt(request.Password));
         }
 
+        [Fact]
+        public async Task ErrorCurrentPasswordDifferent()
+        {
+            // Arrange
+            (var user, var password) = UserBuilder.Build();
+            var passwordEncrypter = PasswordEncrypterBuilder.Build();
+            var request = RequestChangePasswordJsonBuilder.Build();
+
+            request.Password = "password-invalid";
+
+            var useCase = CreateUseCase(user);
+
+            // Act
+            Func<Task> act = async () => await useCase.Execute(request);
+            var result = await act.ShouldThrowAsync<ErrorOnValidationException>();
+
+            // Assert
+            result.ErrorMessages.ShouldHaveSingleItem();
+            result.ErrorMessages.ShouldContain(ResourceMessagesExceptions.PASSWORD_DIFFERENT_CURRENT_PASSWORD);
+            user.Password.ShouldBe(passwordEncrypter.Encrypt(password));
+        }
+
         private static ChangePasswordUseCase CreateUseCase(MyRecipeBook.Domain.Entities.User user)
         {
             var loggedUser = LoggedUserBuilder.Build(user);
