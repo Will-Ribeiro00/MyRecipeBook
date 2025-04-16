@@ -132,6 +132,9 @@
   <data name="NAME_EMPTY" xml:space="preserve">
     <value>The name cannot be empty</value>
   </data>
+  <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
+    <value>The password entered is different from the current password</value>
+  </data>
   <data name="PASSWORD_INVALID" xml:space="preserve">
     <value>The password must contain: 8 characters; 1 uppercase letter; 1 lowercase letter; 1 special character.</value>
   </data>

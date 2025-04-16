@@ -132,6 +132,9 @@
   <data name="NAME_EMPTY" xml:space="preserve">
     <value>O nome não pode estar vazio</value>
   </data>
+  <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
+    <value>A senha inserida é diferente da senha atual</value>
+  </data>
   <data name="PASSWORD_INVALID" xml:space="preserve">
     <value>A senha precisa conter: 8 caracteres; 1 letra maiúscula; 1 letra minúscula; 1 caracter especial.</value>
   </data>

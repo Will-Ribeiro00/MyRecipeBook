@@ -106,6 +106,15 @@ namespace MyRecipeBook.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The password entered is different from the current password.
+        /// </summary>
+        public static string PASSWORD_DIFFERENT_CURRENT_PASSWORD {
+            get {
+                return ResourceManager.GetString("PASSWORD_DIFFERENT_CURRENT_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The password must contain: 8 characters; 1 uppercase letter; 1 lowercase letter; 1 special character..
         /// </summary>
         public static string PASSWORD_INVALID {
