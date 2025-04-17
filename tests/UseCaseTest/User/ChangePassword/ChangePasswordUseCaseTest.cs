@@ -63,8 +63,6 @@ namespace UseCaseTest.User.ChangePassword
             var passwordEncrypter = PasswordEncrypterBuilder.Build();
             var request = RequestChangePasswordJsonBuilder.Build();
 
-            request.Password = "password-invalid";
-
             var useCase = CreateUseCase(user);
 
             // Act
