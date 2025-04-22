@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AT_LEAST_ONE_INGREDIENT" xml:space="preserve">
+    <value>Tenga en cuenta que se requiere al menos un ingrediente.</value>
+  </data>
+  <data name="AT_LEAST_ONE_INSTRUCTION" xml:space="preserve">
+    <value>Asegúrese de que se proporcione al menos una instrucción para la receta.</value>
+  </data>
   <data name="COOKING_TIME_NOT_SUPPORTED" xml:space="preserve">
     <value>El valor de tiempo de preparación proporcionado no es compatible.</value>
   </data>
   <data name="DIFFICULTY_LEVEL_NOT_SUPPORTED" xml:space="preserve">
     <value>El nivel de dificultad especificado para la receta no es compatible</value>
+  </data>
+  <data name="DISH_TYPE_NOT_SUPPORTED" xml:space="preserve">
+    <value>El tipo de plato seleccionado no es compatible</value>
   </data>
   <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
     <value>Correo electrónico ya registrado</value>
@@ -135,8 +144,20 @@
   <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
     <value>Correo electrónico y/o contraseña no válidos</value>
   </data>
+  <data name="INGREDIENT_EMPTY" xml:space="preserve">
+    <value>El ingrediente está vacío, por favor ingrese un valor válido</value>
+  </data>
+  <data name="INSTRUCTION_EMPTY" xml:space="preserve">
+    <value>La instrucción se dejó en blanco, proporcione una instrucción válida</value>
+  </data>
+  <data name="INSTRUCTION_EXCEEDS_LIMIT_CHARACTERS" xml:space="preserve">
+    <value>La declaración excede el límite máximo de 2000 caracteres.</value>
+  </data>
   <data name="NAME_EMPTY" xml:space="preserve">
     <value>El nombre no puede estar vacío</value>
+  </data>
+  <data name="NON_NEGATIVE_INSTRUCTION_STEP" xml:space="preserve">
+    <value>Utilice un valor no negativo para el paso de instrucción</value>
   </data>
   <data name="PASSWORD_DIFFERENT_CURRENT_PASSWORD" xml:space="preserve">
     <value>La contraseña ingresada es diferente a la contraseña actual</value>
@@ -146,6 +167,9 @@
   </data>
   <data name="RECIPE_TITLE_EMPTY" xml:space="preserve">
     <value>El título de la receta se ha dejado en blanco. Por favor, introduzca un título válido.</value>
+  </data>
+  <data name="TWO_OR_MORE_INSTRUCTIONS_SAME_ORDER" xml:space="preserve">
+    <value>Al agregar instrucciones, asegúrese de que cada una tenga un número de paso único. Dos o más instrucciones no pueden tener el mismo paso</value>
   </data>
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Erro desconhecido</value>
