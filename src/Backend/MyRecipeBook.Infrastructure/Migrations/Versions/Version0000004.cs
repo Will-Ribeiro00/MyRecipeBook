@@ -4,7 +4,7 @@ using System.Data;
 namespace MyRecipeBook.Infrastructure.Migrations.Versions
 {
     [Migration(DatabaseVersions.TABLE_RECIPES, "Create table to save the recipes' information")]
-    class Version0000004 : VersionBase
+    public class Version0000004 : VersionBase
     {
         public override void Up()
         {
