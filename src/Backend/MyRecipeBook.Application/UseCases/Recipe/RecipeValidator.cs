@@ -37,7 +37,7 @@ namespace MyRecipeBook.Application.UseCases.Recipe
                 instructionRule.RuleFor(instruction => instruction.Description)
                 .NotEmpty()
                 .WithMessage(ResourceMessagesExceptions.INSTRUCTION_EMPTY)
-                .MinimumLength(2000)
+                .MaximumLength(2000)
                 .WithMessage(ResourceMessagesExceptions.INSTRUCTION_EXCEEDS_LIMIT_CHARACTERS);
             });
 
