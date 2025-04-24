@@ -1,4 +1,6 @@
-﻿using CommonTestUtilities.Tokens;
+﻿using CommonTestUtilities.Requests;
+using CommonTestUtilities.Tokens;
+using MyRecipeBook.Communication.Requests.Recipe;
 using MyRecipeBook.Exception;
 using Shouldly;
 using System.Globalization;
@@ -11,6 +13,8 @@ namespace WebApi.Test.Recipe.Register
     public class RegisterRecipeInvalidTokenTest : MyRecipeBookClassFixture
     {
         private const string METHOD = "recipe";
+
+        private readonly RequestRecipeJson _request = RequestRecipeJsonBuilder.Build();
         public RegisterRecipeInvalidTokenTest(CustomWebApplicationFactory factory) : base(factory) { }
 
         [Theory]
@@ -18,7 +22,7 @@ namespace WebApi.Test.Recipe.Register
         public async Task ErrorTokenInvalid(string culture)
         {
             // Arrange and Act
-            var response = await DoPost(method: METHOD, request: null, token: "tokenInvalido", culture: culture);
+            var response = await DoPost(method: METHOD, request: _request, token: "tokenInvalido", culture: culture);
 
             await using var responseBody = await response.Content.ReadAsStreamAsync();
             var responseData = await JsonDocument.ParseAsync(responseBody);
@@ -37,7 +41,7 @@ namespace WebApi.Test.Recipe.Register
         public async Task ErrorWithoutToken(string culture)
         {
             // Arrange and Act
-            var response = await DoPost(method: METHOD, request: null, token: string.Empty, culture: culture);
+            var response = await DoPost(method: METHOD, request: _request, token: string.Empty, culture: culture);
 
             await using var responseBody = await response.Content.ReadAsStreamAsync();
             var responseData = await JsonDocument.ParseAsync(responseBody);
@@ -59,7 +63,7 @@ namespace WebApi.Test.Recipe.Register
             var token = JwtTokenGeneratorBuilder.Build().Generate(Guid.NewGuid());
 
             // Act
-            var response = await DoPost(method: METHOD,request: null, token: token, culture: culture);
+            var response = await DoPost(method: METHOD,request: _request, token: token, culture: culture);
 
             await using var responseBody = await response.Content.ReadAsStreamAsync();
             var responseData = await JsonDocument.ParseAsync(responseBody);
