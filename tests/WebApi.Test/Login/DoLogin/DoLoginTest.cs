@@ -34,7 +34,7 @@ namespace WebApi.Test.Login.DoLogin
             };
 
             // Act
-            var response = await DoPost(_method, request);
+            var response = await DoPost(method: _method, request: request);
 
             await using var responseBody = await response.Content.ReadAsStreamAsync();
             var responseData = await JsonDocument.ParseAsync(responseBody);
@@ -52,7 +52,7 @@ namespace WebApi.Test.Login.DoLogin
             // Arrange
             var request = RequestLoginJsonBuilder.Build();
 
-            var response = await DoPost(_method, request, culture);
+            var response = await DoPost(method: _method, request: request, culture: culture);
 
             // Act
             await using var responseBody = await response.Content.ReadAsStreamAsync();

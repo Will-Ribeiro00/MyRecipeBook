@@ -19,7 +19,7 @@ namespace WebApi.Test.User.Register
         {
             // Arrange
             var request = RequestRegisterUserJsonBuilder.Build();
-            var response = await DoPost(METHOD, request);
+            var response = await DoPost(method: METHOD, request: request);
 
             // Act
             await using var responseBody = await response.Content.ReadAsStreamAsync();
@@ -40,7 +40,7 @@ namespace WebApi.Test.User.Register
             var request = RequestRegisterUserJsonBuilder.Build();
             request.Name = string.Empty;
 
-            var response = await DoPost(METHOD, request, culture);
+            var response = await DoPost(method: METHOD, request: request, culture: culture);
 
             // Act
             await using var responseBody = await response.Content.ReadAsStreamAsync();
