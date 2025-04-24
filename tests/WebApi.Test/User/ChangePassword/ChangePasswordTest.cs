@@ -47,13 +47,13 @@ namespace WebApi.Test.User.ChangePassword
 
             // <- FIRST TEST AFTER PASSWORD CHANGE ->
             // Act and Assert
-            response = await DoPost("login", logginRequest);
+            response = await DoPost(method: "login", request: logginRequest);
             response.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
 
             // <- SECOND TEST AFTER PASSWORD CHANGE ->
             // Arrange, Act and Assert
             logginRequest.Password = request.NewPassword;
-            response = await DoPost("login", logginRequest);
+            response = await DoPost(method: "login", request: logginRequest);
             response.StatusCode.ShouldBe(HttpStatusCode.OK);
         }
 
