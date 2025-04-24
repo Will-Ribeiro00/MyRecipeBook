@@ -186,6 +186,23 @@ namespace Validator.Test.Recipe
             result.Errors.ShouldContain(e => e.ErrorMessage.Equals(ResourceMessagesExceptions.AT_LEAST_ONE_INSTRUCTION));
         }
 
+        [Fact]
+        public void ErrorInstructionsTooLong()
+        {
+            // Arrange
+            var validator = new RecipeValidator();
+            var request = RequestRecipeJsonBuilder.Build();
+            request.Instructions.First().Description = RequestStringGenerator.Paragraphs(minCharacters: 2001);
+
+            // Act
+            var result = validator.Validate(request);
+
+            // Assert
+            result.IsValid.ShouldBeFalse();
+            result.Errors.ShouldHaveSingleItem();
+            result.Errors.ShouldContain(e => e.ErrorMessage.Equals(ResourceMessagesExceptions.INSTRUCTION_EXCEEDS_LIMIT_CHARACTERS));
+        }
+
         [Theory]
         [InlineData(null)]
         [InlineData("")]
