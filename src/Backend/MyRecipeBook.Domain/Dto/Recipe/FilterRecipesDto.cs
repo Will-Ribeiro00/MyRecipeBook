@@ -4,9 +4,9 @@ namespace MyRecipeBook.Domain.Dto.Recipe
 {
     public record FilterRecipesDto
     {
-        public string? RecipeTitle_Ingredient { get; set; }
-        public IList<CookingTime> CookingTimes { get; set; } = [];
-        public IList<Difficulty> Difficulties { get; set; } = [];
-        public IList<DishType> DishTypes { get; set; } = [];
+        public string? RecipeTitle_Ingredient { get; init; }
+        public IList<CookingTime> CookingTimes { get; init; } = [];
+        public IList<Difficulty> Difficulties { get; init; } = [];
+        public IList<DishType> DishTypes { get; init; } = [];
     }
 }
