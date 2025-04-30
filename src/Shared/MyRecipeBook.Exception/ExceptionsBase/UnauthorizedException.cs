@@ -2,10 +2,9 @@
 
 namespace MyRecipeBook.Exception.ExceptionsBase
 {
-    public class InvalidLoginException : MyRecipeBookException
+    public class UnauthorizedException : MyRecipeBookException
     {
-        public InvalidLoginException() : base(ResourceMessagesExceptions.EMAIL_OR_PASSWORD_INVALID) { }
-
+        public UnauthorizedException(string message) : base(message) { }
         public override IList<string> GetErrorMessages() => [Message];
 
         public override HttpStatusCode GetStatusCode() => HttpStatusCode.Unauthorized;

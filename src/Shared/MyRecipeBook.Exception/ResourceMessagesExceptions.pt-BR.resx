@@ -144,6 +144,9 @@
   <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
     <value>E-mail e/ou senha invalido!</value>
   </data>
+  <data name="EXPIRED_SESSION" xml:space="preserve">
+    <value>Sua sessão expirou. Faça login novamente para continuar</value>
+  </data>
   <data name="INGREDIENT_EMPTY" xml:space="preserve">
     <value>O ingrediente está vazio, por favor indique um valor válido</value>
   </data>
@@ -152,6 +155,9 @@
   </data>
   <data name="INSTRUCTION_EXCEEDS_LIMIT_CHARACTERS" xml:space="preserve">
     <value>A instrução excede o limite máximo de 2000 caracteres</value>
+  </data>
+  <data name="INVALID_SESSION" xml:space="preserve">
+    <value>Não foi possível encontrar uma sessão válida. Faça login para acessar esse recurso</value>
   </data>
   <data name="NAME_EMPTY" xml:space="preserve">
     <value>O nome não pode estar vazio</value>
