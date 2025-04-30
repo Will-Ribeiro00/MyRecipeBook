@@ -2,7 +2,7 @@
 using MyRecipeBook.Communication.Requests.Recipe;
 using MyRecipeBook.Exception;
 
-namespace MyRecipeBook.Application.UseCases.Recipe.Filter
+namespace MyRecipeBook.Application.UseCases.Recipe.FilterAll
 {
     public class FilterRecipeValidator : AbstractValidator<RequestFilterRecipeJson>
     {

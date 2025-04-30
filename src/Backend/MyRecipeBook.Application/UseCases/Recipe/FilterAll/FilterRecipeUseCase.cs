@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MyRecipeBook.Application.UseCases.Recipe.Filter;
 using MyRecipeBook.Communication.Requests.Recipe;
 using MyRecipeBook.Communication.Responses.Recipe;
 using MyRecipeBook.Domain.Dto.Recipe;
@@ -6,7 +7,7 @@ using MyRecipeBook.Domain.Repositories.Recipe;
 using MyRecipeBook.Domain.Services.LoggedUser;
 using MyRecipeBook.Exception.ExceptionsBase;
 
-namespace MyRecipeBook.Application.UseCases.Recipe.Filter
+namespace MyRecipeBook.Application.UseCases.Recipe.FilterAll
 {
     public class FilterRecipeUseCase : IFilterRecipeUseCase
     {
