@@ -165,6 +165,9 @@
   <data name="PASSWORD_INVALID" xml:space="preserve">
     <value>The password must contain: 8 characters; 1 uppercase letter; 1 lowercase letter; 1 special character.</value>
   </data>
+  <data name="RECIPE_NOT_FOUND" xml:space="preserve">
+    <value>The recipe could not be found</value>
+  </data>
   <data name="RECIPE_TITLE_EMPTY" xml:space="preserve">
     <value>The recipe title has been left blank. Please provide a valid title.</value>
   </data>

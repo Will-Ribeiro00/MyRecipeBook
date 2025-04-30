@@ -165,6 +165,9 @@
   <data name="PASSWORD_INVALID" xml:space="preserve">
     <value>La contraseña debe contener: 8 caracteres; 1 letra mayúscula; 1 letra minúscula; 1 caracter especial.</value>
   </data>
+  <data name="RECIPE_NOT_FOUND" xml:space="preserve">
+    <value>No se puede encontrar la receta</value>
+  </data>
   <data name="RECIPE_TITLE_EMPTY" xml:space="preserve">
     <value>El título de la receta se ha dejado en blanco. Por favor, introduzca un título válido.</value>
   </data>
