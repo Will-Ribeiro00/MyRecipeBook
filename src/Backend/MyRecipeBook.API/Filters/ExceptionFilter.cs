@@ -33,6 +33,11 @@ namespace MyRecipeBook.API.Filters
                 context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                 context.Result = new UnauthorizedObjectResult(new ResponseErrorJson(errorList));
             }
+            else if (context.Exception is NotFoundException notFoundException)
+            {
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                context.Result = new NotFoundObjectResult(new ResponseErrorJson(notFoundException.Message));
+            }
         }
         private static void ThrowUnknowException(ExceptionContext context)
         {
