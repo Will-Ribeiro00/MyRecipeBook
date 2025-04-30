@@ -2,10 +2,9 @@
 
 namespace MyRecipeBook.Exception.ExceptionsBase
 {
-    public class InvalidLoginException : MyRecipeBookException
+    public class RefreshTokenNotFoundException : MyRecipeBookException
     {
-        public InvalidLoginException() : base(ResourceMessagesExceptions.EMAIL_OR_PASSWORD_INVALID) { }
-
+        public RefreshTokenNotFoundException() : base(ResourceMessagesExceptions.EXPIRED_SESSION) { }
         public override IList<string> GetErrorMessages() => [Message];
 
         public override HttpStatusCode GetStatusCode() => HttpStatusCode.Unauthorized;

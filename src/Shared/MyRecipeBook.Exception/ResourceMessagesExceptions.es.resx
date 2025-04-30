@@ -144,6 +144,9 @@
   <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
     <value>Correo electrónico y/o contraseña no válidos</value>
   </data>
+  <data name="EXPIRED_SESSION" xml:space="preserve">
+    <value>Tu sesión ha expirado. Inicia sesión de nuevo para continuar.</value>
+  </data>
   <data name="INGREDIENT_EMPTY" xml:space="preserve">
     <value>El ingrediente está vacío, por favor ingrese un valor válido</value>
   </data>
@@ -152,6 +155,9 @@
   </data>
   <data name="INSTRUCTION_EXCEEDS_LIMIT_CHARACTERS" xml:space="preserve">
     <value>La declaración excede el límite máximo de 2000 caracteres.</value>
+  </data>
+  <data name="INVALID_SESSION" xml:space="preserve">
+    <value>No se encontró una sesión válida. Inicie sesión para acceder a esta función.</value>
   </data>
   <data name="NAME_EMPTY" xml:space="preserve">
     <value>El nombre no puede estar vacío</value>

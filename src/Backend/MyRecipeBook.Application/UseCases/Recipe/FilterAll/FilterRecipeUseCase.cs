@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MyRecipeBook.Application.UseCases.Recipe.Filter;
 using MyRecipeBook.Communication.Requests.Recipe;
 using MyRecipeBook.Communication.Responses.Recipe;
 using MyRecipeBook.Domain.Dto.Recipe;

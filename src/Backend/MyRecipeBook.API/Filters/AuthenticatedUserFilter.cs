@@ -29,7 +29,7 @@ namespace MyRecipeBook.API.Filters
                 var exist = await _repository.ExistActiveUserWithIdentifier(userIdentifier);
 
                 if (!exist)
-                    throw new MyRecipeBookException(ResourceMessagesExceptions.USER_WITHOUT_PERMISSION_ACCESS_RESOURCE);
+                    throw new UnauthorizedException(ResourceMessagesExceptions.USER_WITHOUT_PERMISSION_ACCESS_RESOURCE);
             }
             catch (SecurityTokenExpiredException)
             {
@@ -54,7 +54,7 @@ namespace MyRecipeBook.API.Filters
 
             if (string.IsNullOrWhiteSpace(authentication))
             {
-                throw new MyRecipeBookException(ResourceMessagesExceptions.WITHOUT_TOKEN);
+                throw new UnauthorizedException(ResourceMessagesExceptions.WITHOUT_TOKEN);
             }
 
             return authentication["Bearer ".Length..].Trim();
