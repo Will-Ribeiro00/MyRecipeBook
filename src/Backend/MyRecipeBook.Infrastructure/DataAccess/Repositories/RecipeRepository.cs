@@ -13,6 +13,13 @@ namespace MyRecipeBook.Infrastructure.DataAccess.Repositories
 
         public async Task Add(Recipe recipe) => await _context.Recipes.AddAsync(recipe);
 
+        public async Task Delete(long recipeId)
+        {
+            var recipe = await _context.Recipes.FindAsync(recipeId);
+
+            _context.Recipes.Remove(recipe!);
+        }
+
         public async Task<IList<Recipe>> Filter(User user, FilterRecipesDto filters)
         {
             var query = _context.Recipes.AsNoTracking().Include(recipe => recipe.Ingredients).Where(recipe => recipe.Active && recipe.UserId == user.Id);
@@ -48,5 +55,7 @@ namespace MyRecipeBook.Infrastructure.DataAccess.Repositories
                                         .Include(recipe => recipe.DishTypes)
                                         .FirstOrDefaultAsync(recipe => recipe.Active && recipe.Id == recipeId && recipe.UserId == user.Id);
         }
+
+        public async Task<bool> RecipeExist(User user, long recipeId) => await _context.Recipes.AsNoTracking().AnyAsync(recipe => recipe.Active && recipe.Id == recipeId && recipe.UserId == user.Id);
     }
 }
