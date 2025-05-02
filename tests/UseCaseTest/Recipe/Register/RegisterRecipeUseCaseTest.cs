@@ -4,7 +4,6 @@ using CommonTestUtilities.Mapper;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Requests;
 using MyRecipeBook.Application.UseCases.Recipe.Register;
-using MyRecipeBook.Domain.Entities;
 using MyRecipeBook.Exception;
 using MyRecipeBook.Exception.ExceptionsBase;
 using Shouldly;
@@ -44,8 +43,8 @@ namespace UseCaseTest.Recipe.Register
             var result =  await act.ShouldThrowAsync<ErrorOnValidationException>();
 
             // Assert
-            result.ErrorMessages.ShouldHaveSingleItem();
-            result.ErrorMessages.ShouldContain(ResourceMessagesExceptions.RECIPE_TITLE_EMPTY);
+            result.GetErrorMessages().ShouldHaveSingleItem();
+            result.GetErrorMessages().ShouldContain(ResourceMessagesExceptions.RECIPE_TITLE_EMPTY);
         }
 
         private static RegisterRecipeUseCase CreateUseCase(MyRecipeBook.Domain.Entities.User user)

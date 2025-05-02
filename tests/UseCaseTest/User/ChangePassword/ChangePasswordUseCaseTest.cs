@@ -50,8 +50,8 @@ namespace UseCaseTest.User.ChangePassword
             var result = await act.ShouldThrowAsync<ErrorOnValidationException>();
 
             // Assert
-            result.ErrorMessages.ShouldHaveSingleItem();
-            result.ErrorMessages.ShouldContain(ResourceMessagesExceptions.PASSWORD_INVALID);
+            result.GetErrorMessages().ShouldHaveSingleItem();
+            result.GetErrorMessages().ShouldContain(ResourceMessagesExceptions.PASSWORD_INVALID);
             user.Password.ShouldBe(passwordEncrypter.Encrypt(request.Password));
         }
 
@@ -70,8 +70,8 @@ namespace UseCaseTest.User.ChangePassword
             var result = await act.ShouldThrowAsync<ErrorOnValidationException>();
 
             // Assert
-            result.ErrorMessages.ShouldHaveSingleItem();
-            result.ErrorMessages.ShouldContain(ResourceMessagesExceptions.PASSWORD_DIFFERENT_CURRENT_PASSWORD);
+            result.GetErrorMessages().ShouldHaveSingleItem();
+            result.GetErrorMessages().ShouldContain(ResourceMessagesExceptions.PASSWORD_DIFFERENT_CURRENT_PASSWORD);
             user.Password.ShouldBe(passwordEncrypter.Encrypt(password));
         }
 

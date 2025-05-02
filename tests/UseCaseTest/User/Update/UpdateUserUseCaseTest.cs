@@ -3,7 +3,6 @@ using CommonTestUtilities.LoggedUser;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Requests;
 using MyRecipeBook.Application.UseCases.User.Update;
-using MyRecipeBook.Domain.Entities;
 using MyRecipeBook.Exception;
 using MyRecipeBook.Exception.ExceptionsBase;
 using Shouldly;
@@ -45,8 +44,8 @@ namespace UseCaseTest.User.Update
             var result = await act.ShouldThrowAsync<ErrorOnValidationException>();
 
             // Assert
-            result.ErrorMessages.ShouldHaveSingleItem();
-            result.ErrorMessages.ShouldContain(ResourceMessagesExceptions.NAME_EMPTY);
+            result.GetErrorMessages().ShouldHaveSingleItem();
+            result.GetErrorMessages().ShouldContain(ResourceMessagesExceptions.NAME_EMPTY);
             user.Name.ShouldNotBe(request.Name);
             user.Email.ShouldNotBe(request.Email);
         }
@@ -65,8 +64,8 @@ namespace UseCaseTest.User.Update
             var result = await act.ShouldThrowAsync<ErrorOnValidationException>();
 
             // Assert
-            result.ErrorMessages.ShouldHaveSingleItem();
-            result.ErrorMessages.ShouldContain(ResourceMessagesExceptions.EMAIL_ALREADY_REGISTERED);
+            result.GetErrorMessages().ShouldHaveSingleItem();
+            result.GetErrorMessages().ShouldContain(ResourceMessagesExceptions.EMAIL_ALREADY_REGISTERED);
             user.Name.ShouldNotBe(request.Name);
             user.Email.ShouldNotBe(request.Email);
         }

@@ -1,5 +1,5 @@
 ﻿using CommonTestUtilities.Requests;
-using MyRecipeBook.Application.UseCases.Recipe.Filter;
+using MyRecipeBook.Application.UseCases.Recipe.FilterAll;
 using MyRecipeBook.Exception;
 using Shouldly;
 

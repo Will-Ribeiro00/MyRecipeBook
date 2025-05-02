@@ -40,8 +40,8 @@ namespace UseCaseTest.User.Register
             var result = await act.ShouldThrowAsync<ErrorOnValidationException>();
 
             // Arrange
-            result.ErrorMessages.ShouldHaveSingleItem();
-            result.ErrorMessages.ShouldContain(ResourceMessagesExceptions.EMAIL_ALREADY_REGISTERED);
+            result.GetErrorMessages().ShouldHaveSingleItem();
+            result.GetErrorMessages().ShouldContain(ResourceMessagesExceptions.EMAIL_ALREADY_REGISTERED);
         }
         [Fact]
         public async Task ErrorNameEmpty()
@@ -56,8 +56,8 @@ namespace UseCaseTest.User.Register
             var result = await act.ShouldThrowAsync<ErrorOnValidationException>();
 
             // Arrange
-            result.ErrorMessages.ShouldHaveSingleItem();
-            result.ErrorMessages.ShouldContain(ResourceMessagesExceptions.NAME_EMPTY);
+            result.GetErrorMessages().ShouldHaveSingleItem();
+            result.GetErrorMessages().ShouldContain(ResourceMessagesExceptions.NAME_EMPTY);
         }
 
         private static RegisterUserUseCase CreateUseCase(string? email = null)

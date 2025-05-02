@@ -47,8 +47,8 @@ namespace UseCaseTest.Recipe.Filter
             var result = await act.ShouldThrowAsync<ErrorOnValidationException>();
 
             // Assert
-            result.ErrorMessages.ShouldHaveSingleItem();
-            result.ErrorMessages.ShouldContain(ResourceMessagesExceptions.COOKING_TIME_NOT_SUPPORTED);
+            result.GetErrorMessages().ShouldHaveSingleItem();
+            result.GetErrorMessages().ShouldContain(ResourceMessagesExceptions.COOKING_TIME_NOT_SUPPORTED);
         }
 
         private static FilterRecipeUseCase CreateUseCase(MyRecipeBook.Domain.Entities.User user, IList<MyRecipeBook.Domain.Entities.Recipe> recipes)
