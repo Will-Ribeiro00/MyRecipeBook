@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyRecipeBook.Application.Services.AutoMapper;
+using MyRecipeBook.Application.UseCases.Dashboard.Get;
 using MyRecipeBook.Application.UseCases.Login;
 using MyRecipeBook.Application.UseCases.Recipe.Delete;
 using MyRecipeBook.Application.UseCases.Recipe.FilterAll;
@@ -37,6 +38,8 @@ namespace MyRecipeBook.Application
             services.AddScoped<IGetRecipeByIdUseCase, GetRecipeByIdUseCase>();
             services.AddScoped<IDeleteRecipeUseCase, DeleteRecipeUseCase>();
             services.AddScoped<IUpdateRecipeUseCase, UpdateRecipeUseCase>();
+
+            services.AddScoped<IGetDashboardUseCase, GetDashboardUseCase>();
         }
         private static void AddIdEncoder(IServiceCollection services, IConfiguration configuration)
         {
