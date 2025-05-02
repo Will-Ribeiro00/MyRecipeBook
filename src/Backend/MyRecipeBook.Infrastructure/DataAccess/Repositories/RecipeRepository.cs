@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using MyRecipeBook.Domain.Dto.Recipe;
 using MyRecipeBook.Domain.Entities;
 using MyRecipeBook.Domain.Repositories.Recipe;
 
 namespace MyRecipeBook.Infrastructure.DataAccess.Repositories
 {
-    public sealed class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepository
+    public sealed class RecipeRepository : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepository, IRecipeUpdateOnlyRepository
     {
         private readonly MyRecipeBookDbContext _context;
 
@@ -47,15 +48,29 @@ namespace MyRecipeBook.Infrastructure.DataAccess.Repositories
             return await query.ToListAsync();
         }
 
-        public async Task<Recipe?> GetById(User user, long recipeId)
+        async Task<Recipe?> IRecipeReadOnlyRepository.GetById(User user, long recipeId)
         {
-            return await _context.Recipes.AsNoTracking()
-                                        .Include(recipe => recipe.Ingredients)
-                                        .Include(recipe => recipe.Instructions)
-                                        .Include(recipe => recipe.DishTypes)
-                                        .FirstOrDefaultAsync(recipe => recipe.Active && recipe.Id == recipeId && recipe.UserId == user.Id);
+            return await GetFullRecipe()
+                        .AsNoTracking()
+                        .FirstOrDefaultAsync(recipe => recipe.Active && recipe.Id == recipeId && recipe.UserId == user.Id);
+        }
+        async Task<Recipe?> IRecipeUpdateOnlyRepository.GetById(User user, long recipeId)
+        {
+            return await GetFullRecipe()
+                        .FirstOrDefaultAsync(recipe => recipe.Active && recipe.Id == recipeId && recipe.UserId == user.Id);
         }
 
         public async Task<bool> RecipeExist(User user, long recipeId) => await _context.Recipes.AsNoTracking().AnyAsync(recipe => recipe.Active && recipe.Id == recipeId && recipe.UserId == user.Id);
+
+        public void Update(Recipe recipe) => _context.Recipes.Update(recipe);
+
+
+        private IIncludableQueryable<Recipe, IList<DishType>> GetFullRecipe()
+        {
+            return _context.Recipes
+                                .Include(recipe => recipe.Ingredients)
+                                .Include(recipe => recipe.Instructions)
+                                .Include(recipe => recipe.DishTypes);
+        }
     }
 }
