@@ -1,4 +1,5 @@
 ﻿using CommonTestUtilities.Entities;
+using CommonTestUtilities.IdEncryption;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,7 @@ namespace WebApi.Test
         public Guid GetUserIdentifier() => _user.UserIdentifier;
 
         //Recipe Infos
+        public string GetRecipeId() => IdEncrypterBuilder.Build().Encode(_recipe.Id);
         public string GetRecipeTitle() => _recipe.Title;
         public CookingTime GetRecipeCookingTime() => _recipe.CookingTime!.Value;
         public Difficulty GetRecipeDifficulty() => _recipe.Difficulty!.Value;
