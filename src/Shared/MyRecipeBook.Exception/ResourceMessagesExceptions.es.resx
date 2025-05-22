@@ -132,6 +132,9 @@
   <data name="DISH_TYPE_NOT_SUPPORTED" xml:space="preserve">
     <value>El tipo de plato seleccionado no es compatible</value>
   </data>
+  <data name="DUPLICATED_INGREDIENTS_IN_LIST" xml:space="preserve">
+    <value>No se permiten ingredientes duplicados en la lista.</value>
+  </data>
   <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
     <value>Correo electrónico ya registrado</value>
   </data>
@@ -150,11 +153,17 @@
   <data name="INGREDIENT_EMPTY" xml:space="preserve">
     <value>El ingrediente está vacío, por favor ingrese un valor válido</value>
   </data>
+  <data name="INGREDIENT_NOT_FOLLOWING_PATTERN" xml:space="preserve">
+    <value>Formato de ingrediente no válido. Asegúrese de que el ingrediente cumpla con nuestro estándar.</value>
+  </data>
   <data name="INSTRUCTION_EMPTY" xml:space="preserve">
     <value>La instrucción se dejó en blanco, proporcione una instrucción válida</value>
   </data>
   <data name="INSTRUCTION_EXCEEDS_LIMIT_CHARACTERS" xml:space="preserve">
     <value>La declaración excede el límite máximo de 2000 caracteres.</value>
+  </data>
+  <data name="INVALID_NUMBER_INGREDIENTS" xml:space="preserve">
+    <value>Número de ingredientes no válido. La lista debe contener entre 1 y 5 ingredientes.</value>
   </data>
   <data name="INVALID_SESSION" xml:space="preserve">
     <value>No se encontró una sesión válida. Inicie sesión para acceder a esta función.</value>
