@@ -6,6 +6,7 @@ using MyRecipeBook.Application.UseCases.Login;
 using MyRecipeBook.Application.UseCases.Recipe.Delete;
 using MyRecipeBook.Application.UseCases.Recipe.FilterAll;
 using MyRecipeBook.Application.UseCases.Recipe.FilterById;
+using MyRecipeBook.Application.UseCases.Recipe.Generate;
 using MyRecipeBook.Application.UseCases.Recipe.Register;
 using MyRecipeBook.Application.UseCases.Recipe.Update;
 using MyRecipeBook.Application.UseCases.User.ChangePassword;
@@ -40,6 +41,7 @@ namespace MyRecipeBook.Application
             services.AddScoped<IUpdateRecipeUseCase, UpdateRecipeUseCase>();
 
             services.AddScoped<IGetDashboardUseCase, GetDashboardUseCase>();
+            services.AddScoped<IGenerateRecipeUseCase, GenerateRecipeUseCase>();
         }
         private static void AddIdEncoder(IServiceCollection services, IConfiguration configuration)
         {
