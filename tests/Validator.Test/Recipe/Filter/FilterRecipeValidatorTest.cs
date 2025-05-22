@@ -3,7 +3,7 @@ using MyRecipeBook.Application.UseCases.Recipe.FilterAll;
 using MyRecipeBook.Exception;
 using Shouldly;
 
-namespace Validator.Test.Recipe
+namespace Validator.Test.Recipe.Filter
 {
     public class FilterRecipeValidatorTest
     {
