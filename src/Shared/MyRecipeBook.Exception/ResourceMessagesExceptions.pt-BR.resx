@@ -193,7 +193,7 @@
     <value>Ao adicionar instruções, certifique-se de que cada uma tem um número de passo único. Duas ou mais instruções não podem ter o mesmo passo</value>
   </data>
   <data name="UNKNOWN_ERROR" xml:space="preserve">
-    <value>Error desconocido</value>
+    <value>Erro desconhecido</value>
   </data>
   <data name="USER_WITHOUT_PERMISSION_ACCESS_RESOURCE" xml:space="preserve">
     <value>Usuário sem permissão</value>
