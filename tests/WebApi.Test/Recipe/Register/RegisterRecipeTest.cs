@@ -23,11 +23,11 @@ namespace WebApi.Test.Recipe.Register
         public async Task Success()
         {
             // Arrange
-            var request = RequestRecipeJsonBuilder.Build();
+            var request = RequestRegisterRecipeFormDataBuilder.Build();
             var token = JwtTokenGeneratorBuilder.Build().Generate(_userIdentifier);
 
             // Act
-            var response = await DoPost(method: METHOD, request: request, token: token);
+            var response = await DoPostFormData(method: METHOD, request: request, token: token);
 
             await using var responseBody = await response.Content.ReadAsStreamAsync();
             var responseData = await JsonDocument.ParseAsync(responseBody);
@@ -43,12 +43,12 @@ namespace WebApi.Test.Recipe.Register
         public async Task ErrorTitleEmpty(string culture)
         {
             // Arrange
-            var request = RequestRecipeJsonBuilder.Build();
+            var request = RequestRegisterRecipeFormDataBuilder.Build();
             request.Title = string.Empty;
             var token = JwtTokenGeneratorBuilder.Build().Generate(_userIdentifier);
 
             // Act
-            var response = await DoPost(method: METHOD, request: request, token: token, culture: culture);
+            var response = await DoPostFormData(method: METHOD, request: request, token: token, culture: culture);
 
             await using var responseBody = await response.Content.ReadAsStreamAsync();
             var responseData = await JsonDocument.ParseAsync(responseBody);
