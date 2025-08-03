@@ -67,7 +67,10 @@ builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
 
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddHostedService<DeleteUserService>();
+if (!builder.Configuration.IsUnitTestEnviroment())
+{
+    builder.Services.AddHostedService<DeleteUserService>();
+}
 
 var app = builder.Build();
 

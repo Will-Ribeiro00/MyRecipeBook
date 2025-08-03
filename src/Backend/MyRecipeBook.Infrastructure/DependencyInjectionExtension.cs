@@ -40,11 +40,12 @@ namespace MyRecipeBook.Infrastructure
             AddPasswordEncrypter(services, configuration);
             AddOpenAI(services, configuration);
             AddAzureStorage(services, configuration);
-            AddQueue(services, configuration);
+            
 
             if (configuration.IsUnitTestEnviroment())
                 return;
 
+            AddQueue(services, configuration);
             AddDbContext(services, configuration);
             AddFluentMigrator(services, configuration);
         }
