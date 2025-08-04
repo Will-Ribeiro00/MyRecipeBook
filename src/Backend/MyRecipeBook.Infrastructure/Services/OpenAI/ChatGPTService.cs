@@ -5,11 +5,11 @@ using OpenAI.Chat;
 
 namespace MyRecipeBook.Infrastructure.Services.OpenAI
 {
-    public class ChatGPTService : IGenerateRecipeAI
+    public class ChatGptService : IGenerateRecipeAI
     {
         private readonly ChatClient _chatClient;
 
-        public ChatGPTService(ChatClient chatClient) => _chatClient = chatClient;
+        public ChatGptService(ChatClient chatClient) => _chatClient = chatClient;
 
         public async Task<GeneratedRecipeDto> Generate(IList<string> ingredients)
         {

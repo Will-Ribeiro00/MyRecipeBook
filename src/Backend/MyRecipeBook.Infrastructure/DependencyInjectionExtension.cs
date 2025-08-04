@@ -104,7 +104,7 @@ namespace MyRecipeBook.Infrastructure
         }
         private static void AddOpenAI(IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IGenerateRecipeAI, ChatGPTService>();
+            services.AddScoped<IGenerateRecipeAI, ChatGptService>();
 
             var key = configuration.GetValue<string>("Settings:OpenAI:ApiKey");
 
