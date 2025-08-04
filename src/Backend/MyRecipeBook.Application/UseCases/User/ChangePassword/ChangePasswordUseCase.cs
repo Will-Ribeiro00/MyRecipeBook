@@ -38,16 +38,15 @@ namespace MyRecipeBook.Application.UseCases.User.ChangePassword
             await _unitOfWork.Commit();
         }
 
-        private void Validate(RequestChangePasswordJson request, Domain.Entities.User loggedUSer)
+        private void Validate(RequestChangePasswordJson request, Domain.Entities.User loggedUser)
         {
             var result = new ChangePasswordValidator().Validate(request);
 
-            var currentPasswordEncrypted = _passwordEncrypter.Encrypt(request.Password);
-            if (!currentPasswordEncrypted.Equals(loggedUSer.Password))
+            if (!_passwordEncrypter.IsValid(request.Password, loggedUser.Password))
                 result.Errors.Add(new ValidationFailure(string.Empty, ResourceMessagesExceptions.PASSWORD_DIFFERENT_CURRENT_PASSWORD));
 
             if (!result.IsValid)
-                throw new ErrorOnValidationException(result.Errors.Select(e => e.ErrorMessage).ToList());
+                throw new ErrorOnValidationException([.. result.Errors.Select(e => e.ErrorMessage)]);
         }
     }
 }

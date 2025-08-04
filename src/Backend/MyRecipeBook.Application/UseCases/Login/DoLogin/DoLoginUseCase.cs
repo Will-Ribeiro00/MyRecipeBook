@@ -22,11 +22,12 @@ namespace MyRecipeBook.Application.UseCases.Login.DoLogin
         }
         public async Task<ResponseRegisteredUserJson> Execute(RequestLoginJson request)
         {
-            var encrypterPassword = _passwordEncrypter.Encrypt(request.Password);
+            var user = await _repository.GetByEmail(request.Email);
 
-            var user = await _repository.GetUserByEmailAndPassword(request.Email, encrypterPassword) ?? throw new InvalidLoginException();
+            if (user is null || !_passwordEncrypter.IsValid(request.Password, user.Password))
+                throw new InvalidLoginException();
 
-            return  new ResponseRegisteredUserJson
+            return new ResponseRegisteredUserJson
             {
                 Name = user.Name,
                 Tokens = new ResponseTokensJson
