@@ -37,7 +37,7 @@ namespace MyRecipeBook.Infrastructure
             AddRepositories(services);
             AddLoggedUser(services);
             AddTokens(services, configuration);
-            AddPasswordEncrypter(services, configuration);
+            AddPasswordEncrypter(services);
             AddOpenAI(services, configuration);
             AddAzureStorage(services, configuration);
             
@@ -96,11 +96,9 @@ namespace MyRecipeBook.Infrastructure
         {
             services.AddScoped<ILoggedUser, LoggedUser>();
         }
-        private static void AddPasswordEncrypter(IServiceCollection services, IConfiguration configuration)
+        private static void AddPasswordEncrypter(IServiceCollection services)
         {
-            var additionalKey = configuration.GetValue<string>("Settings:Password:AdditionalKey");
-
-            services.AddScoped<IPasswordEncrypter>(option => new Sha512Encrypter(additionalKey!));
+            services.AddScoped<IPasswordEncrypter, BCryptNet>();
         }
         private static void AddOpenAI(IServiceCollection services, IConfiguration configuration)
         {

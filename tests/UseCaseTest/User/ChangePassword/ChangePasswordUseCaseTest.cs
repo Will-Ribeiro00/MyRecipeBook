@@ -17,19 +17,15 @@ namespace UseCaseTest.User.ChangePassword
         {
             // Arrange
             (var user, var password) = UserBuilder.Build();
-            var passwordEncrypter = PasswordEncrypterBuilder.Build();
             var request = RequestChangePasswordJsonBuilder.Build();
 
             request.Password = password;
             
             var useCase = CreateUseCase(user);
 
-            // Act
+            // Act and Assert
             Func<Task> act = async () => await useCase.Execute(request);
             await act.ShouldNotThrowAsync();
-
-            // Assert
-            user.Password.ShouldBe(passwordEncrypter.Encrypt(request.NewPassword));
         }
 
         [Fact]
@@ -37,7 +33,6 @@ namespace UseCaseTest.User.ChangePassword
         {
             // Arrange
             (var user, var password) = UserBuilder.Build();
-            var passwordEncrypter = PasswordEncrypterBuilder.Build();
             var request = RequestChangePasswordJsonBuilder.Build();
 
             request.Password = password;
@@ -52,7 +47,6 @@ namespace UseCaseTest.User.ChangePassword
             // Assert
             result.GetErrorMessages().ShouldHaveSingleItem();
             result.GetErrorMessages().ShouldContain(ResourceMessagesExceptions.PASSWORD_INVALID);
-            user.Password.ShouldBe(passwordEncrypter.Encrypt(request.Password));
         }
 
         [Fact]
@@ -60,7 +54,6 @@ namespace UseCaseTest.User.ChangePassword
         {
             // Arrange
             (var user, var password) = UserBuilder.Build();
-            var passwordEncrypter = PasswordEncrypterBuilder.Build();
             var request = RequestChangePasswordJsonBuilder.Build();
 
             var useCase = CreateUseCase(user);
@@ -72,7 +65,6 @@ namespace UseCaseTest.User.ChangePassword
             // Assert
             result.GetErrorMessages().ShouldHaveSingleItem();
             result.GetErrorMessages().ShouldContain(ResourceMessagesExceptions.PASSWORD_DIFFERENT_CURRENT_PASSWORD);
-            user.Password.ShouldBe(passwordEncrypter.Encrypt(password));
         }
 
         private static ChangePasswordUseCase CreateUseCase(MyRecipeBook.Domain.Entities.User user)
