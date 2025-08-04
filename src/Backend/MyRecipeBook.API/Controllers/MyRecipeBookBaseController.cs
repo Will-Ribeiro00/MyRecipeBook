@@ -10,9 +10,9 @@ namespace MyRecipeBook.API.Controllers
     {
         protected static bool IsNotAuthenticated(AuthenticateResult authenticate)
         {
-            return authenticate.Succeeded == false
+            return !authenticate.Succeeded
                 || authenticate.Principal is null
-                || authenticate.Principal.Identities.Any(id => id.IsAuthenticated == false);
+                || authenticate.Principal.Identities.Any(id => !id.IsAuthenticated);
         }
     }
 }

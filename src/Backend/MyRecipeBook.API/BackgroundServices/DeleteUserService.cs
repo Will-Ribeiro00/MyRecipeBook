@@ -37,7 +37,7 @@ namespace MyRecipeBook.API.BackgroundServices
             await deleteUserUseCase.Execute(userIdentifier);
         }
 
-        private Task ExceptionReceivedHandler(ProcessErrorEventArgs _) => Task.CompletedTask;
+        private static Task ExceptionReceivedHandler(ProcessErrorEventArgs _) => Task.CompletedTask;
 
         ~DeleteUserService() => Dispose();
 
