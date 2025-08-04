@@ -1,5 +1,4 @@
-﻿
-using MyRecipeBook.Domain.Repositories;
+﻿using MyRecipeBook.Domain.Repositories;
 using MyRecipeBook.Domain.Repositories.User;
 using MyRecipeBook.Domain.Secutiry.Tokens;
 
