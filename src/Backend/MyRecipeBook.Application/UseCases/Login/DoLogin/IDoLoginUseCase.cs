@@ -1,7 +1,7 @@
 ﻿using MyRecipeBook.Communication.Requests.Login;
 using MyRecipeBook.Communication.Responses.User;
 
-namespace MyRecipeBook.Application.UseCases.Login
+namespace MyRecipeBook.Application.UseCases.Login.DoLogin
 {
     public interface IDoLoginUseCase
     {
