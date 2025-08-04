@@ -3,7 +3,7 @@ using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Requests;
 using CommonTestUtilities.Tokens;
-using MyRecipeBook.Application.UseCases.Login;
+using MyRecipeBook.Application.UseCases.Login.DoLogin;
 using MyRecipeBook.Communication.Requests.Login;
 using MyRecipeBook.Exception;
 using MyRecipeBook.Exception.ExceptionsBase;
