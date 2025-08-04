@@ -2,7 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using MyRecipeBook.Application.Services.AutoMapper;
 using MyRecipeBook.Application.UseCases.Dashboard.Get;
-using MyRecipeBook.Application.UseCases.Login;
+using MyRecipeBook.Application.UseCases.Login.DoLogin;
+using MyRecipeBook.Application.UseCases.Login.External;
 using MyRecipeBook.Application.UseCases.Recipe.Delete;
 using MyRecipeBook.Application.UseCases.Recipe.FilterAll;
 using MyRecipeBook.Application.UseCases.Recipe.FilterById;
@@ -38,6 +39,7 @@ namespace MyRecipeBook.Application
             services.AddScoped<IRequestDeleteUserUseCase, RequestDeleteUserUseCase>();
             services.AddScoped<IDeleteUserAccountUseCase, DeleteUserAccountUseCase>();
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
+            services.AddScoped<IExternalLoginUseCase, ExternalLoginUseCase>();
 
             services.AddScoped<IRegisterRecipeUseCase, RegisterRecipeUseCase>();
             services.AddScoped<IFilterRecipeUseCase, FilterRecipeUseCase>();
