@@ -7,5 +7,6 @@
         public const int ADD_COLUMN_USERIDENTIFIER = 3;
         public const int TABLE_RECIPES = 4;
         public const int IMAGES_FOR_RECIPES = 5;
+        public const int TABLE_REFRESH_TOKEN = 6;
     }
 }
