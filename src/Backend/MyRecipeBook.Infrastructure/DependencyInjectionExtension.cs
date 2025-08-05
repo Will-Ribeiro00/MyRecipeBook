@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyRecipeBook.Domain.Repositories;
 using MyRecipeBook.Domain.Repositories.Recipe;
+using MyRecipeBook.Domain.Repositories.Token;
 using MyRecipeBook.Domain.Repositories.User;
 using MyRecipeBook.Domain.Secutiry.Cryptography;
 using MyRecipeBook.Domain.Secutiry.Tokens;
@@ -20,6 +21,7 @@ using MyRecipeBook.Infrastructure.Extensions;
 using MyRecipeBook.Infrastructure.Security.Cryptography;
 using MyRecipeBook.Infrastructure.Security.Tokens.Access.Generator;
 using MyRecipeBook.Infrastructure.Security.Tokens.Access.Validator;
+using MyRecipeBook.Infrastructure.Security.Tokens.Refresh;
 using MyRecipeBook.Infrastructure.Services.LoggedUser;
 using MyRecipeBook.Infrastructure.Services.OpenAI;
 using MyRecipeBook.Infrastructure.Services.ServiceBus;
@@ -69,6 +71,8 @@ namespace MyRecipeBook.Infrastructure
             services.AddScoped<IRecipeWriteOnlyRepository, RecipeRepository>();
             services.AddScoped<IRecipeReadOnlyRepository, RecipeRepository>();
             services.AddScoped<IRecipeUpdateOnlyRepository, RecipeRepository>();
+            services.AddScoped<ITokenRepository, TokenRepository>();
+            services.AddScoped<IRefreshTokenGenerator, RefreshTokenGenerator>();
         }
         private static void AddUnitOfWork(IServiceCollection services)
         {
