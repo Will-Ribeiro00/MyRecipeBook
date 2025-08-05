@@ -62,17 +62,19 @@ namespace UseCaseTest.User.Register
 
         private static RegisterUserUseCase CreateUseCase(string? email = null)
         {
+            var readOnlyRepository = new UserReadOnlyRepositoryBuilder();
+            var writeOnlyRepository = UserWriteOnlyRepositoryBuilder.Build();
             var mapper = MapperBuilder.Build();
             var passwordEncrypter = PasswordEncrypterBuilder.Build();
             var unitOfWork = UnitOfWorkBuilder.Build();
-            var writeOnlyRepository = UserWriteOnlyRepositoryBuilder.Build();
-            var readOnlyRepository = new UserReadOnlyRepositoryBuilder();
             var accessTokenGenerator = JwtTokenGeneratorBuilder.Build();
+            var tokenRepository = new TokenRepositoryBuilder().Build();
+            var refreshTokenGenerator = RefreshTokenGeneratorBuilder.Build();
 
             if (!string.IsNullOrWhiteSpace(email))
                 readOnlyRepository.ExistActiveUserWithEmail(email);
 
-            return new RegisterUserUseCase(readOnlyRepository.Build(), writeOnlyRepository, mapper, passwordEncrypter, unitOfWork, accessTokenGenerator);
+            return new RegisterUserUseCase(readOnlyRepository.Build(), writeOnlyRepository, mapper, passwordEncrypter, unitOfWork, accessTokenGenerator, tokenRepository, refreshTokenGenerator);
         }
     }
 }

@@ -49,14 +49,17 @@ namespace UseCaseTest.Login.DoLogin
 
         private static DoLoginUseCase CreateUseCase(MyRecipeBook.Domain.Entities.User? user = null)
         {
-            var passwordEncrypter = PasswordEncrypterBuilder.Build();
             var readOnlyRepository = new UserReadOnlyRepositoryBuilder();
+            var passwordEncrypter = PasswordEncrypterBuilder.Build();
+            var unitOfWork = UnitOfWorkBuilder.Build();
             var accessTokenGenerator = JwtTokenGeneratorBuilder.Build();
+            var tokenRepository = new TokenRepositoryBuilder().Build();
+            var refreshTokenGenerator = RefreshTokenGeneratorBuilder.Build();
 
             if (user is not null)
                 readOnlyRepository.GetByEmail(user);
 
-            return new DoLoginUseCase(readOnlyRepository.Build(), passwordEncrypter, accessTokenGenerator);
+            return new DoLoginUseCase(readOnlyRepository.Build(), passwordEncrypter, unitOfWork, accessTokenGenerator, tokenRepository, refreshTokenGenerator);
         }
     }
 }

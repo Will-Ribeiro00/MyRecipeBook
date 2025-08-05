@@ -3,7 +3,6 @@ using MyRecipeBook.Communication.Requests.User;
 using MyRecipeBook.Communication.Responses.Tokens;
 using MyRecipeBook.Communication.Responses.User;
 using MyRecipeBook.Domain.Repositories;
-using MyRecipeBook.Domain.Repositories.Token;
 using MyRecipeBook.Domain.Repositories.User;
 using MyRecipeBook.Domain.Secutiry.Cryptography;
 using MyRecipeBook.Domain.Secutiry.Tokens;
@@ -20,10 +19,8 @@ namespace MyRecipeBook.Application.UseCases.User.Register
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPasswordEncrypter _passwordEncrypter;
         private readonly IAccessTokenGenerator _accessTokenGenerator;
-        private readonly ITokenRepository _tokenRepository;
-        private readonly IRefreshTokenGenerator _refreshTokenGenerator;
 
-        public RegisterUserUseCase(IUserReadOnlyRepository readOnly, IUserWriteOnlyRepository writeOnly, IMapper mapper, IPasswordEncrypter passwordEncrypter, IUnitOfWork unitOfWork, IAccessTokenGenerator accessTokenGenerator, ITokenRepository tokenRepository, IRefreshTokenGenerator refreshTokenGenerator)
+        public RegisterUserUseCase(IUserReadOnlyRepository readOnly, IUserWriteOnlyRepository writeOnly, IMapper mapper, IPasswordEncrypter passwordEncrypter, IUnitOfWork unitOfWork, IAccessTokenGenerator accessTokenGenerator)
         {
             _readOnlyRepository = readOnly;
             _writeOnlyRepository = writeOnly;
@@ -31,8 +28,6 @@ namespace MyRecipeBook.Application.UseCases.User.Register
             _passwordEncrypter = passwordEncrypter;
             _unitOfWork = unitOfWork;
             _accessTokenGenerator = accessTokenGenerator;
-            _tokenRepository = tokenRepository;
-            _refreshTokenGenerator = refreshTokenGenerator;
         }
         public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
         {
@@ -45,15 +40,12 @@ namespace MyRecipeBook.Application.UseCases.User.Register
             await _writeOnlyRepository.Add(user);
             await _unitOfWork.Commit();
 
-            var refreshToken = await CreateAndSaveRefreshToken(user);
-
             return new ResponseRegisteredUserJson
             {
                 Name = request.Name,
                 Tokens = new ResponseTokensJson
                 {
-                    AccessToken = _accessTokenGenerator.Generate(user.UserIdentifier),
-                    RefreshToken = refreshToken
+                    AccessToken = _accessTokenGenerator.Generate(user.UserIdentifier)
                 }
             };
         }
@@ -65,7 +57,7 @@ namespace MyRecipeBook.Application.UseCases.User.Register
             var result = validator.Validate(request);
 
             var emailExist = await _readOnlyRepository.ExistActiveUserWithEmail(request.Email);
-            if (emailExist)
+            if(emailExist)
                 result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, ResourceMessagesExceptions.EMAIL_ALREADY_REGISTERED));
 
             if (!result.IsValid)
@@ -74,20 +66,6 @@ namespace MyRecipeBook.Application.UseCases.User.Register
 
                 throw new ErrorOnValidationException(errorMessages);
             }
-        }
-        private async Task<string> CreateAndSaveRefreshToken(Domain.Entities.User user)
-        {
-            var refreshToken = new Domain.Entities.RefreshToken
-            {
-                Value = _refreshTokenGenerator.Generate(),
-                UserId = user.Id,
-            };
-
-            await _tokenRepository.SaveNewRefreshToken(refreshToken);
-
-            await _unitOfWork.Commit();
-
-            return refreshToken.Value;
         }
     }
 }

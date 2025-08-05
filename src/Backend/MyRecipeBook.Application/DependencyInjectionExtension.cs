@@ -11,7 +11,6 @@ using MyRecipeBook.Application.UseCases.Recipe.Generate;
 using MyRecipeBook.Application.UseCases.Recipe.Image;
 using MyRecipeBook.Application.UseCases.Recipe.Register;
 using MyRecipeBook.Application.UseCases.Recipe.Update;
-using MyRecipeBook.Application.UseCases.Token.RefreshToken;
 using MyRecipeBook.Application.UseCases.User.ChangePassword;
 using MyRecipeBook.Application.UseCases.User.Delete.Delete;
 using MyRecipeBook.Application.UseCases.User.Delete.Request;
@@ -51,8 +50,6 @@ namespace MyRecipeBook.Application
             services.AddScoped<IGetDashboardUseCase, GetDashboardUseCase>();
             services.AddScoped<IGenerateRecipeUseCase, GenerateRecipeUseCase>();
             services.AddScoped<IAddUpdateImageCoverUseCase, AddUpdateImageCoverUseCase>();
-
-            services.AddScoped<IUseRefreshTokenUseCase, UseRefreshTokenUseCase>();
         }
         private static void AddIdEncoder(IServiceCollection services, IConfiguration configuration)
         {
