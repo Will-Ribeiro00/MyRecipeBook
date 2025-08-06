@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyRecipeBook.Application.UseCases.Token.RefreshToken;
+using MyRecipeBook.Application.UseCases.Tokens.RefreshToken;
 using MyRecipeBook.Communication.Requests.Token;
 using MyRecipeBook.Communication.Responses.Tokens;
 

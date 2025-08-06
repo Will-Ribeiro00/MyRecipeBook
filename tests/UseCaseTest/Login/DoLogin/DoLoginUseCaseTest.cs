@@ -59,7 +59,7 @@ namespace UseCaseTest.Login.DoLogin
             if (user is not null)
                 readOnlyRepository.GetByEmail(user);
 
-            return new DoLoginUseCase(readOnlyRepository.Build(), passwordEncrypter, unitOfWork, accessTokenGenerator, tokenRepository, refreshTokenGenerator);
+            return new DoLoginUseCase(readOnlyRepository.Build(), passwordEncrypter, accessTokenGenerator, unitOfWork, refreshTokenGenerator, tokenRepository);
         }
     }
 }

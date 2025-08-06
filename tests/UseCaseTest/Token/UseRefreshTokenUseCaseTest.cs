@@ -1,8 +1,7 @@
-﻿using Azure.Core;
-using CommonTestUtilities.Entities;
+﻿using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Tokens;
-using MyRecipeBook.Application.UseCases.Token.RefreshToken;
+using MyRecipeBook.Application.UseCases.Tokens.RefreshToken;
 using MyRecipeBook.Communication.Requests.Token;
 using MyRecipeBook.Domain.ValueObjects;
 using MyRecipeBook.Exception;
@@ -82,7 +81,7 @@ namespace UseCaseTest.Token
             var refreshTokenGenerator = RefreshTokenGeneratorBuilder.Build();
             var tokenRepository = new TokenRepositoryBuilder().Get(refreshToken).Build();
 
-            return new UseRefreshTokenUseCase(accessTokenGenerator, refreshTokenGenerator, tokenRepository, unitOfWork);
+            return new UseRefreshTokenUseCase(tokenRepository, refreshTokenGenerator, accessTokenGenerator, unitOfWork);
         }
     }
 }
