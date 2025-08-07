@@ -1,35 +1,59 @@
 ﻿using Dapper;
 using FluentMigrator.Runner;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
+using MyRecipeBook.Domain.Enums;
 using MySqlConnector;
 
 namespace MyRecipeBook.Infrastructure.Migrations
 {
     public static class DatabaseMigration
     {
-        public static void Migrate(string connectionString, IServiceProvider serviceProvider)
+        public static void Migrate(string connectionString, IServiceProvider serviceProvider, DatabaseType databaseType)
         {
-            EnsureDataBaseCreated(connectionString);
+            EnsureDataBaseCreated(connectionString, databaseType);
             MigrationDatabase(serviceProvider);
         }
 
-        private static void EnsureDataBaseCreated(string connectionString)
+        private static void EnsureDataBaseCreated(string connectionString, DatabaseType databaseType)
         {
-            var connectionStringBuilder = new MySqlConnectionStringBuilder(connectionString);
-            var databaseName = connectionStringBuilder.Database;
+            if(databaseType == DatabaseType.MySql)
+            {
+                var connectionStringBuilder = new MySqlConnectionStringBuilder(connectionString);
+                var databaseName = connectionStringBuilder.Database;
 
-            connectionStringBuilder.Remove("Database");
+                connectionStringBuilder.Remove("Database");
 
-            using var dbConnection = new MySqlConnection(connectionStringBuilder.ConnectionString);
+                using var dbConnection = new MySqlConnection(connectionStringBuilder.ConnectionString);
 
-            var parameters = new DynamicParameters();
-            parameters.Add("name",databaseName);
+                var parameters = new DynamicParameters();
+                parameters.Add("name", databaseName);
 
-            var records =  dbConnection.Query("SELECT * FROM INFORMATION_SCHEMA.SCHEMATA " +
-                                              "WHERE SCHEMA_NAME = @name", parameters);
+                var records = dbConnection.Query("SELECT * FROM INFORMATION_SCHEMA.SCHEMATA " +
+                                                  "WHERE SCHEMA_NAME = @name", parameters);
 
-            if (!records.Any())
-                dbConnection.Execute($"CREATE DATABASE {databaseName}");
+                if (!records.Any())
+                    dbConnection.Execute($"CREATE DATABASE {databaseName}");
+            }
+            else
+            {
+                var connectionStringBuilder = new SqlConnectionStringBuilder(connectionString);
+
+                var databaseName = connectionStringBuilder.InitialCatalog;
+
+                connectionStringBuilder.Remove("Database");
+
+                using var dbConnection = new SqlConnection(connectionStringBuilder.ConnectionString);
+
+                var parameters = new DynamicParameters();
+                parameters.Add("name", databaseName);
+
+                var records = dbConnection.Query("SELECT * FROM sys.databases WHERE name = @name", parameters);
+
+                if (!records.Any())
+                    dbConnection.Execute($"CREATE DATABASE {databaseName}");
+            }
+            
         }
         private static void MigrationDatabase(IServiceProvider serviceProvider)
         {
