@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
 using MyRecipeBook.API.BackgroundServices;
 using MyRecipeBook.API.Converters;
@@ -8,6 +10,7 @@ using MyRecipeBook.API.Token;
 using MyRecipeBook.Application;
 using MyRecipeBook.Domain.Secutiry.Tokens;
 using MyRecipeBook.Infrastructure;
+using MyRecipeBook.Infrastructure.DataAccess;
 using MyRecipeBook.Infrastructure.Extensions;
 using MyRecipeBook.Infrastructure.Migrations;
 
@@ -74,7 +77,19 @@ if (!builder.Configuration.IsUnitTestEnviroment())
     AddGoogleAuthentication();
 }
 
+builder.Services.AddHealthChecks().AddDbContextCheck<MyRecipeBookDbContext>();
+
 var app = builder.Build();
+
+app.MapHealthChecks("/Health", new HealthCheckOptions
+{
+    AllowCachingResponses = false,
+    ResultStatusCodes =
+    {
+        [HealthStatus.Healthy] = StatusCodes.Status200OK,
+        [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+    }
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
